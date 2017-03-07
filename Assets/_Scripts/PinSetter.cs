@@ -68,4 +68,14 @@ public class PinSetter : MonoBehaviour
             throw new UnityException("Dont know how to end game!");
         }
     }
+
+    public void EnableControls()
+    {
+        GameObject.FindObjectOfType<DragLaunch>().controlEnabled = true;
+    }
+
+    public void DisableControls()
+    {
+        GameObject.FindObjectOfType<DragLaunch>().controlEnabled = false;
+    }
 }

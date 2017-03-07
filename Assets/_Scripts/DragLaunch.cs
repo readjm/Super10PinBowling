@@ -6,6 +6,7 @@ public class DragLaunch : MonoBehaviour
 {
     public float dragXscale;
     public float dragZScale;
+    public bool controlEnabled = true;
 
     private Ball ball;
     private Vector3 dragPosStart;
@@ -34,7 +35,7 @@ public class DragLaunch : MonoBehaviour
     public void DragStart()
     {
         //Capture time and position of mouse click
-        if (!ball.inPlay)
+        if (!ball.inPlay && controlEnabled)
         {
             dragPosStart = Input.mousePosition;
             dragTimeStart = Time.time;
@@ -45,7 +46,7 @@ public class DragLaunch : MonoBehaviour
     public void DragEnd()
     {
         //launch ball: speed = distance/time
-        if (!ball.inPlay)
+        if (!ball.inPlay && controlEnabled)
         {
             dragPosEnd = Input.mousePosition;
             dragTimeEnd = Time.time;
@@ -62,7 +63,7 @@ public class DragLaunch : MonoBehaviour
 
     public void MoveStart(float xNudge)
     {
-        if (!ball.inPlay)
+        if (!ball.inPlay && controlEnabled)
         {
             ball.transform.position = new Vector3(Mathf.Clamp(ball.transform.position.x + xNudge, -.525f, .525f), ball.transform.position.y, ball.transform.position.z);
         }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public LevelManager levelManager;
+    public Text textPrefab;
 
     private static List<Player> players = new List<Player>();
     private PinSetter pinSetter;
@@ -77,6 +78,18 @@ public class GameManager : MonoBehaviour
         }
          
         ball.Reset();
+    }
+
+    public void SetNumPlayers(int numPlayers)
+    {
+        for (int i = 1; i <= numPlayers; i++)
+        {
+            Text newPlayer = Instantiate(textPrefab) as Text;
+            newPlayer.text = "P" + i.ToString();
+            AddPlayer(newPlayer);
+        }
+
+        GameObject.FindObjectOfType<LevelManager>().LoadNextLevel();
     }
 
     public static List<Player> GetPlayers()

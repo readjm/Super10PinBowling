@@ -6,49 +6,49 @@ using System.Collections.Generic;
 public class PlayersManager : MonoBehaviour {
 
     public Text textPrefab;
-    public Button addButton;
-    public Button doneButton;
-    public Button removeButtonPrefab;
-    public Button renameButtonPrefab;
+    //public Button addButton;
+    //public Button doneButton;
+    //public Button removeButtonPrefab;
+    //public Button renameButtonPrefab;
 
     private List<Text> players = new List<Text>();
     private TouchScreenKeyboard keyboard;
     private Text newPlayer;
     private bool gettingName;
 
-    void Start()
-    {
-        //keyboard = new TouchScreenKeyboard("", TouchScreenKeyboardType.Default, false, false, false, false, "P" + players.Count.ToString());
-        doneButton.enabled = false;
-    }
+    //void Start()
+    //{
+    //    //keyboard = new TouchScreenKeyboard("", TouchScreenKeyboardType.Default, false, false, false, false, "P" + players.Count.ToString());
+    //    doneButton.enabled = false;
+    //}
 
-    void Update()
-    {
-        if (keyboard != null && keyboard.done && gettingName == true)
-        {
-            gettingName = false;
-            Done(keyboard.text);
-        }
-    }
+    //void Update()
+    //{
+    //    if (keyboard != null && keyboard.done && gettingName == true)
+    //    {
+    //        gettingName = false;
+    //        Done(keyboard.text);
+    //    }
+    //}
 
-    public void AddPlayer()
-    {
-        addButton.transform.position += new Vector3(0, -76, 0);
-        addButton.enabled = false;
-        if (doneButton.enabled == false)
-        {
-            doneButton.enabled = true;
-        }
-        if (players.Count > 0)
-        {
-            doneButton.transform.position += new Vector3(0, -76, 0);
-        }
+    //public void AddPlayer()
+    //{
+    //    addButton.transform.position += new Vector3(0, -76, 0);
+    //    addButton.enabled = false;
+    //    if (doneButton.enabled == false)
+    //    {
+    //        doneButton.enabled = true;
+    //    }
+    //    if (players.Count > 0)
+    //    {
+    //        doneButton.transform.position += new Vector3(0, -76, 0);
+    //    }
 
-        gettingName = true;
-        TouchScreenKeyboard.hideInput = true;
-        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false, "P" + players.Count.ToString());
-        TouchScreenKeyboard.hideInput = true;
-    }
+    //    gettingName = true;
+    //    TouchScreenKeyboard.hideInput = true;
+    //    keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false, "P" + players.Count.ToString());
+    //    TouchScreenKeyboard.hideInput = true;
+    //}
 
     public void AddPlayer(Text player)
     {
@@ -60,25 +60,37 @@ public class PlayersManager : MonoBehaviour {
 
     }
 
-    public void Done(string text)
+    public void SetNumPlayers(int numPlayers)
     {
-        newPlayer = Instantiate(textPrefab, transform) as Text;
-        newPlayer.transform.SetParent(transform);
-        newPlayer.text = text;
-        newPlayer.transform.position += new Vector3(0, -76 * (players.Count), 0);
+        for (int i=1; i<=numPlayers; i++)
+        {
+            Text newPlayer = Instantiate(textPrefab) as Text;
+            newPlayer.text = i.ToString();
+            players.Add(newPlayer);
+        }
 
-        addButton.enabled = true;
-        players.Add(newPlayer);
-        doneButton.enabled = false;
+        GameObject.FindObjectOfType<LevelManager>().LoadNextLevel();
     }
 
-    public void RemovePlayer(int index)
-    {
-        players.RemoveAt(index);
-    }
+    //public void Done(string text)
+    //{
+    //    newPlayer = Instantiate(textPrefab, transform) as Text;
+    //    newPlayer.transform.SetParent(transform);
+    //    newPlayer.text = text;
+    //    newPlayer.transform.position += new Vector3(0, -76 * (players.Count), 0);
 
-    public void RemovePlayer(Text text)
-    {
-        players.Remove(text);
-    }
+    //    addButton.enabled = true;
+    //    players.Add(newPlayer);
+    //    doneButton.enabled = false;
+    //}
+
+    //public void RemovePlayer(int index)
+    //{
+    //    players.RemoveAt(index);
+    //}
+
+    //public void RemovePlayer(Text text)
+    //{
+    //    players.Remove(text);
+    //}
 }
