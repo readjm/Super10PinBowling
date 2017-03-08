@@ -37,7 +37,7 @@ public class OptionsController : MonoBehaviour {
 		}
 
         //PlayerPrefsManager.SetDifficulty(difficultySlider.value);
-        levelManager.LoadLevel("Menu");
+        //levelManager.LoadLevel("Menu");
 	}
 	
 	public void SetDefaults()
