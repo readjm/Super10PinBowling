@@ -49,11 +49,15 @@ public class GameManager : MonoBehaviour
     {
         players[playerTurn-1].rolls.Add(pinFall);
 
+        scoreDisplay.SetPlayerName(players[playerTurn - 1].playerName);
+        scoreDisplay.FillRolls(players[playerTurn - 1].rolls, true);
+        scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(players[playerTurn - 1].rolls));
+
         ActionMaster.Action nextAction = ActionMaster.NextAction(players[playerTurn-1].rolls);
         
         if (nextAction == ActionMaster.Action.ENDGAME && playerTurn == players.Count)
         {
-            levelManager.LoadLevel("End");
+            Invoke("EndGame", 5);
             return;
         }
         else if (nextAction == ActionMaster.Action.ENDGAME || nextAction == ActionMaster.Action.ENDTURN)
@@ -62,9 +66,9 @@ public class GameManager : MonoBehaviour
         }
         
         pinSetter.PerformAction(nextAction);
-        scoreDisplay.SetPlayerName(players[playerTurn - 1].playerName);
-        scoreDisplay.FillRolls(players[playerTurn - 1].rolls);
-        scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(players[playerTurn - 1].rolls));
+        //scoreDisplay.SetPlayerName(players[playerTurn - 1].playerName);
+        //scoreDisplay.FillRolls(players[playerTurn - 1].rolls, true);
+        //scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(players[playerTurn - 1].rolls));
 
         if (nextAction == ActionMaster.Action.ENDTURN)
         {
@@ -106,8 +110,13 @@ public class GameManager : MonoBehaviour
     {
         scoreDisplay.Clear();
         scoreDisplay.SetPlayerName(players[playerTurn-1].playerName);
-        scoreDisplay.FillRolls(players[playerTurn - 1].rolls);
+        scoreDisplay.FillRolls(players[playerTurn - 1].rolls, false);
         scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(players[playerTurn - 1].rolls));
         ball.Reset();
+    }
+
+    private void EndGame()
+    {
+        levelManager.LoadLevel("End");
     }
 }

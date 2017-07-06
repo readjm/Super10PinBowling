@@ -4,36 +4,42 @@ using System.Collections;
 
 public class OptionsController : MonoBehaviour {
 
-	public Slider volumeSlider;
-	//public Slider difficultySlider;
-	public LevelManager levelManager;
+    public Slider masterVolumeSlider;
+    public Slider musicVolumeSlider;
+    //public Slider difficultySlider;
+    public LevelManager levelManager;
 	
 	private MusicPlayer musicPlayer;
 	
 	void Start ()
 	{
 		musicPlayer = GameObject.FindObjectOfType<MusicPlayer>();
-		volumeSlider.value = PlayerPrefsManager.GetMasterVolume();
-		
-		//difficultySlider.value = PlayerPrefsManager.GetDifficulty();
-		
-	}
+        masterVolumeSlider.value = PlayerPrefsManager.GetMasterVolume();
+        musicVolumeSlider.value = PlayerPrefsManager.GetMusicVolume();
+
+        //difficultySlider.value = PlayerPrefsManager.GetDifficulty();
+
+    }
 	
 	void Update ()
 	{
-		if (musicPlayer)
+        AudioListener.volume = masterVolumeSlider.value;
+        if (musicPlayer)
 		{
-			musicPlayer.SetVolume(volumeSlider.value);
+			musicPlayer.SetVolume(musicVolumeSlider.value);
 		}
 	}
 	
 	public void SaveAndExit()
 	{
-		PlayerPrefsManager.SetMasterVolume(volumeSlider.value);
-		
-		if (musicPlayer)
+        PlayerPrefsManager.SetMasterVolume(masterVolumeSlider.value);
+        PlayerPrefsManager.SetMusicVolume(musicVolumeSlider.value);
+
+        AudioListener.volume = masterVolumeSlider.value;
+
+        if (musicPlayer)
 		{
-			musicPlayer.SetVolume(volumeSlider.value);
+			musicPlayer.SetVolume(musicVolumeSlider.value);
 		}
 
         //PlayerPrefsManager.SetDifficulty(difficultySlider.value);
@@ -42,7 +48,8 @@ public class OptionsController : MonoBehaviour {
 	
 	public void SetDefaults()
 	{
-		volumeSlider.value = .8f;
-		//difficultySlider.value = 2f;
-	}
+        masterVolumeSlider.value = 1f;
+        musicVolumeSlider.value = .8f;
+        //difficultySlider.value = 2f;
+    }
 }

@@ -5,7 +5,8 @@ using System.Collections;
 public class PlayerPrefsManager : MonoBehaviour {
 
 	const string MASTER_VOLUME_KEY = "master_volume";
-	const string DIFFICULTY_KEY = "difficulty";
+    const string MUSIC_VOLUME_KEY = "music_volume";
+    const string DIFFICULTY_KEY = "difficulty";
 	const string LEVEL_KEY = "level_unlocked_";
 	
 	public static void SetMasterVolume(float volume)
@@ -19,13 +20,30 @@ public class PlayerPrefsManager : MonoBehaviour {
 			Debug.LogError("Master volume out of range");
 		}
 	}
-	
-	public static float GetMasterVolume()
+
+    public static void SetMusicVolume(float volume)
+    {
+        if (volume >= 0f && volume <= 1f)
+        {
+            PlayerPrefs.SetFloat(MUSIC_VOLUME_KEY, volume);
+        }
+        else
+        {
+            Debug.LogError("Music volume out of range");
+        }
+    }
+
+    public static float GetMasterVolume()
 	{
 		return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
 	}
-	
-	public static void UnlockLevel(int level)
+
+    public static float GetMusicVolume()
+    {
+        return PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY);
+    }
+
+    public static void UnlockLevel(int level)
 	{
 		if (level <= SceneManager.sceneCount-1)
 		{

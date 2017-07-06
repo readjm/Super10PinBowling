@@ -1,0 +1,56 @@
+Music:
+
+
+Game Music, "Bebop 25"
+-courtesy of Jason Shaw via audionautix.com
+-licensed under CC BY 3.0
+
+Menu Music, "Jumpin Boogie Woogie"
+-courtesy of Jason Shaw via audionautix.com
+-licensed under CC BY 3.0
+
+
+Sounds:
+
+Clapping sounds "small Clap", "medium clap"
+-courtesy of kellieskitchen via freesound.org
+-licensed under CC BY 3.0
+
+Audience booing, "boo 01"
+-courtesy of Corsica_S via freesound.org
+-licensed under CC BY 3.0
+
+Ball rolling sound, "Bowling Ball.wav"
+-courtesy of driftworks via freesoound.org
+-licensed under CC0 1.0
+
+Pin Strike and ball strike sounds extracted from "bowling alley pins break 2.wav"
+-courtesy Tomlija via freesound.org
+-licesnsed uner cc BY 3.0
+
+
+Textures, Images and Models:
+
+Bowling lane texture extracted from "Bowling Alley Model"
+-courtesy of BrightRetro via OpenGameArt.org
+-licensed under CC BY 3.0
+
+Strike, Spare, Double, Turkey, Gutter, monitor, arrow button, and application icon images extracted from "Bowling Game GUI Elements"
+-courtesy of BrightRetro via OpenGameArt.org
+-licensed under CC BY 3.0
+
+Options button image, "gear-856921_640.png"
+-courtesy of sempron via pixabay.com
+-licensed under CC0 1.0
+
+
+Title Fonts:
+
+"Super Mario 256"
+-courtesy of fsuarez913 via dafont.com
+
+"Bowlorama"
+-courtesy of Font Diner (FontDiner.com) via dafont.com
+
+"Cinerama"
+-courtesy of Florian Mihr via dafont.com

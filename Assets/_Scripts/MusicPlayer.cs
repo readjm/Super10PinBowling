@@ -30,14 +30,18 @@ public class MusicPlayer : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneWasLoaded;
 		}
 	}
-	
-	// Use this for initialization
-	void Start ()
-	{
-		Debug.Log("Music Player Start " + GetInstanceID());
-	}
 
-	public void PlayTrack(int track)
+    // Use this for initialization
+    void Start()
+    {
+        Debug.Log("Music Player Start " + GetInstanceID());
+
+        AudioListener.volume = PlayerPrefs.GetFloat("master_volume");
+        audioSource.volume = PlayerPrefs.GetFloat("music_volume");
+    }
+
+
+    public void PlayTrack(int track)
 	{
 		Debug.Log ("Level/track #: " + trackList[track]);
 		if (this.GetComponent<AudioSource>().clip != trackList[track])
