@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
 	public AudioClip restartSound;
 	
 	private bool pause = false;
-	private OptionsController optionsController;
+	//private OptionsController optionsController;
 	
 	void Start()
 	{
@@ -19,11 +19,11 @@ public class LevelManager : MonoBehaviour
         //Screen.fullScreen = true;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 		
-		if (GameObject.FindObjectOfType<OptionsController>())
-		{
-			optionsController = GameObject.FindObjectOfType<OptionsController>();
-			optionsController.gameObject.SetActive(false);
-		}
+		//if (GameObject.FindObjectOfType<OptionsController>())
+		//{
+		//	optionsController = GameObject.FindObjectOfType<OptionsController>();
+		//	optionsController.gameObject.SetActive(false);
+		//}
 		
 		if (autoLoadNextLevelAfter <= 0f)
 		{
@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
 				GameObject.FindObjectOfType<MusicPlayer>().GetComponent<AudioSource>().Pause();
 			}
 						
-			optionsController.gameObject.SetActive(true);
+			//optionsController.gameObject.SetActive(true);
 		}
 		else
 		{
@@ -99,9 +99,19 @@ public class LevelManager : MonoBehaviour
 				GameObject.FindObjectOfType<MusicPlayer>().GetComponent<AudioSource>().Play();
 			}
 						
-			optionsController.gameObject.SetActive(false);
+			//optionsController.gameObject.SetActive(false);
 		}
 	}
+
+    public void QuitToMain()
+    {
+        Time.timeScale = 1f;
+        if (GameObject.FindObjectOfType<MusicPlayer>())
+        {
+            GameObject.FindObjectOfType<MusicPlayer>().GetComponent<AudioSource>().Play();
+        }
+        LoadLevel("Menu");
+    }
 	
 	public void QuitRequest()
 	{

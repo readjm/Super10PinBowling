@@ -6,12 +6,13 @@ public class PlayerPrefsManager : MonoBehaviour {
 
 	const string MASTER_VOLUME_KEY = "master_volume";
     const string MUSIC_VOLUME_KEY = "music_volume";
+    const string EFFECTS_VOLUME_KEY = "effects_volume";
     const string DIFFICULTY_KEY = "difficulty";
 	const string LEVEL_KEY = "level_unlocked_";
 	
 	public static void SetMasterVolume(float volume)
 	{
-		if (volume >= 0f && volume <= 1f)
+		if (volume >= -80f && volume <= 0f)
 		{
 			PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, volume);
 		}
@@ -23,13 +24,24 @@ public class PlayerPrefsManager : MonoBehaviour {
 
     public static void SetMusicVolume(float volume)
     {
-        if (volume >= 0f && volume <= 1f)
+        if (volume >= -80f && volume <= 0f)
         {
             PlayerPrefs.SetFloat(MUSIC_VOLUME_KEY, volume);
         }
         else
         {
             Debug.LogError("Music volume out of range");
+        }
+    }
+    public static void SetEffectsVolume(float volume)
+    {
+        if (volume >= -80f && volume <= 0f)
+        {
+            PlayerPrefs.SetFloat(EFFECTS_VOLUME_KEY, volume);
+        }
+        else
+        {
+            Debug.LogError("Effects volume out of range");
         }
     }
 
@@ -41,6 +53,11 @@ public class PlayerPrefsManager : MonoBehaviour {
     public static float GetMusicVolume()
     {
         return PlayerPrefs.GetFloat(MUSIC_VOLUME_KEY);
+    }
+
+    public static float GetEffectsVolume()
+    {
+        return PlayerPrefs.GetFloat(EFFECTS_VOLUME_KEY);
     }
 
     public static void UnlockLevel(int level)

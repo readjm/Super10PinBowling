@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using System.Collections;
+
+[RequireComponent(typeof(AudioSource))]
 
 public class MusicPlayer : MonoBehaviour
 {
     static MusicPlayer instance = null;
 	
 	public AudioClip[] trackList;
+    public AudioMixer masterMixer;
+
 	private AudioSource audioSource;
 
     //delegate void OnSceneWasLoaded(int level);
@@ -36,8 +41,8 @@ public class MusicPlayer : MonoBehaviour
     {
         Debug.Log("Music Player Start " + GetInstanceID());
 
-        AudioListener.volume = PlayerPrefs.GetFloat("master_volume");
-        audioSource.volume = PlayerPrefs.GetFloat("music_volume");
+        masterMixer.SetFloat("masterVolume", PlayerPrefs.GetFloat("master_volume"));
+        masterMixer.SetFloat("musicVolume", PlayerPrefs.GetFloat("music_volume"));
     }
 
 

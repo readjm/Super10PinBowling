@@ -47,13 +47,14 @@ public class GameManager : MonoBehaviour
 
     public void Bowl(int pinFall)
     {
-        players[playerTurn-1].rolls.Add(pinFall);
+        Player player = players[playerTurn - 1];
+        player.rolls.Add(pinFall);
 
-        scoreDisplay.SetPlayerName(players[playerTurn - 1].playerName);
-        scoreDisplay.FillRolls(players[playerTurn - 1].rolls, true);
-        scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(players[playerTurn - 1].rolls));
+        scoreDisplay.SetPlayerName(player.playerName);
+        scoreDisplay.FillRolls(player, true);
+        scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(player.rolls));
 
-        ActionMaster.Action nextAction = ActionMaster.NextAction(players[playerTurn-1].rolls);
+        ActionMaster.Action nextAction = ActionMaster.NextAction(player.rolls);
         
         if (nextAction == ActionMaster.Action.ENDGAME && playerTurn == players.Count)
         {
@@ -77,6 +78,7 @@ public class GameManager : MonoBehaviour
             {
                 playerTurn = 1;
             }
+            ball.SetMaterial(playerTurn - 1);
             Invoke("NextTurn", 5);
             return;
         }
@@ -108,10 +110,12 @@ public class GameManager : MonoBehaviour
 
     private void NextTurn()
     {
+        Player player = players[playerTurn - 1];
+
         scoreDisplay.Clear();
-        scoreDisplay.SetPlayerName(players[playerTurn-1].playerName);
-        scoreDisplay.FillRolls(players[playerTurn - 1].rolls, false);
-        scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(players[playerTurn - 1].rolls));
+        scoreDisplay.SetPlayerName(player.playerName);
+        scoreDisplay.FillRolls(player, false);
+        scoreDisplay.FillFrames(ScoreMaster.ScoreCumulative(player.rolls));
         ball.Reset();
     }
 

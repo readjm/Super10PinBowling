@@ -4,22 +4,24 @@ using System.Collections;
 public class Ball : MonoBehaviour
 {
 
-    public float speed = 0;
+    //public float speed = 0;
+    public float launchVelocityModifier = 1f;
     public bool inPlay = false;
 
     public AudioSource ballRoll;
     public AudioSource ballStrike;
-    private Rigidbody rigidbody;
+    public Material[] ballMaterials;
+
+    private Rigidbody rb;
     private Vector3 startPosition;
-    
 
     // Use this for initialization
     void Start ()
     {
         //ballRoll = GetComponent<AudioSource>();
 
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.useGravity = false;
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
 
         startPosition = transform.position;
 	}
@@ -38,19 +40,38 @@ public class Ball : MonoBehaviour
     
     public void Launch(Vector3 velocity)
     {
-        rigidbody.useGravity = true;
-        rigidbody.velocity = velocity;
+        rb.useGravity = true;
+        rb.velocity = velocity*launchVelocityModifier;
         inPlay = true;
     }
 
     public void Reset()
     {
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
-        rigidbody.useGravity = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.useGravity = false;
         transform.position = startPosition;
         transform.rotation = Quaternion.identity;
-
         inPlay = false;
+    }
+
+    public void SetMaterial(int ballIndex)
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null && ballIndex < ballMaterials.Length)
+        {
+            renderer.material = ballMaterials[ballIndex];
+        }
+
+    }
+
+    public void SetMaterial(Material newBallMaterial)
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material = newBallMaterial;
+        }
+
     }
 }
